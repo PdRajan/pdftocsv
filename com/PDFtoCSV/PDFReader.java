@@ -1,5 +1,4 @@
 package com.PDFtoCSV;
-
 import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -35,6 +34,7 @@ public class PDFReader
     private DataBlock data;
     private boolean isFirstTime;
     private StringBuilder csvData;
+    Coordinates coords;
     
     public PDFReader(final String fp) {
         this.data = new DataBlock();
@@ -73,7 +73,7 @@ public class PDFReader
     }
     
     public boolean isSoePage(final short pageNo) {
-        this.strategy = this.newArea(Coordinates.SOELLY , Coordinates.SOELLX , Coordinates.SOEURY , Coordinates.SOEURX);
+        this.strategy = this.newArea(coords.SOELLY , coords.SOELLX , coords.SOEURY , coords.SOEURX);
         try {
             if (PdfTextExtractor.getTextFromPage(this.file, (int)pageNo, this.strategy).toLowerCase().contains("scheme of examinations")) {
                 return true;
@@ -84,7 +84,7 @@ public class PDFReader
     }
     
     public void getSoeSchemeId(final short pageNo) {
-        this.strategy = this.newArea(Coordinates.PDLLY, Coordinates.PDLLX, Coordinates.PDURY, Coordinates.PDURX);
+        this.strategy = this.newArea(coords.PDLLY, coords.PDLLX, coords.PDURY, coords.PDURX);
         try {
             final String pageDetails = PdfTextExtractor.getTextFromPage(this.file, (int)pageNo, this.strategy).toLowerCase();
             this.data.soeSchemeId = pageDetails.substring(pageDetails.indexOf("schemeid") + 10, pageDetails.indexOf("schemeid") + 22);
@@ -109,7 +109,7 @@ public class PDFReader
     // }
     
     public void readPageDetails(final short pageNo) {
-        this.strategy = this.newArea(Coordinates.PHLLY, Coordinates.PHLLX, Coordinates.PHURY, Coordinates.PHURX);
+        this.strategy = this.newArea(coords.PHLLY, coords.PHLLX, coords.PHURY, coords.PHURX);
         try {
             final String pageheader = PdfTextExtractor.getTextFromPage(this.file, (int)pageNo, this.strategy);
             data.semester = extractSem(pageheader);
@@ -137,10 +137,10 @@ public class PDFReader
 
     // TODO : Modularize this, or at the very least clean it up!
     public void readResultsFromPage(final short pageNo) {
-        float lly = Coordinates.SRNLLY;
-        float ury = Coordinates.SRNURY;
-        float llx = Coordinates.SDLLX;
-        float urx = Coordinates.SDURX;
+        float lly = coords.SRNLLY;
+        float ury = coords.SRNURY;
+        float llx = coords.SDLLX;
+        float urx = coords.SDURX;
         for (byte i = 0; i < 10; ++i) {
             try {
                 this.strategy = this.newArea(lly, llx, ury, urx);
@@ -149,24 +149,24 @@ public class PDFReader
                     this.data.rollNo[i] = null;
                     break;
                 }
-                lly = Coordinates.SNLLY + i * Coordinates.SDIY;
-                ury = Coordinates.SNURY + i * Coordinates.SDIY;
+                lly = coords.SNLLY + i * coords.SDIY;
+                ury = coords.SNURY + i * coords.SDIY;
                 this.strategy = this.newArea(lly, llx, ury, urx);
                 this.data.name[i] = PdfTextExtractor.getTextFromPage(this.file, (int)pageNo, this.strategy);
-                lly = Coordinates.SIDLLY + i * Coordinates.SDIY;
-                ury = Coordinates.SIDURY + i * Coordinates.SDIY;
+                lly = coords.SIDLLY + i * coords.SDIY;
+                ury = coords.SIDURY + i * coords.SDIY;
                 this.strategy = this.newArea(lly, llx, ury, urx);
                 this.data.studentId[i] = PdfTextExtractor.getTextFromPage(this.file, (int)pageNo, this.strategy);
-                lly = Coordinates.SSIDLLY + i * Coordinates.SDIY;
-                ury = Coordinates.SSIDURY + i * Coordinates.SDIY;
+                lly = coords.SSIDLLY + i * coords.SDIY;
+                ury = coords.SSIDURY + i * coords.SDIY;
                 this.strategy = this.newArea(lly, llx, ury, urx);
                 this.data.schemeId[i] = PdfTextExtractor.getTextFromPage(this.file, (int)pageNo, this.strategy);
                 this.data.studentId[i] = this.data.studentId[i].substring(this.data.studentId[i].indexOf(":") + 2);
                 this.data.schemeId[i] = this.data.schemeId[i].substring(this.data.schemeId[i].indexOf(":") + 2);
-                llx = Coordinates.MLLX;
-                urx = Coordinates.MURX;
-                lly = Coordinates.MLLY + i * Coordinates.SDIY;
-                ury = Coordinates.MURY + i * Coordinates.SDIY;
+                llx = coords.MLLX;
+                urx = coords.MURX;
+                lly = coords.MLLY + i * coords.SDIY;
+                ury = coords.MURY + i * coords.SDIY;
                 for (byte j = 0; j < 30; ++j) {
                     this.strategy = this.newArea(lly, llx, ury, urx);
                     this.data.subjectCodes[i][j] = PdfTextExtractor.getTextFromPage(this.file, (int)pageNo, this.strategy);
@@ -178,19 +178,19 @@ public class PDFReader
                     this.data.subjectCodes[i][j] = this.data.subjectCodes[i][j].replace('\n', ' ');
 
 
-                    lly = Coordinates.MLLY + i * Coordinates.SDIY + Coordinates.MRI;
-                    ury = Coordinates.MURY + i * Coordinates.SDIY + Coordinates.MRI;
-                    urx = urx - Coordinates.MIEI + 0.01f;
+                    lly = coords.MLLY + i * coords.SDIY + coords.MRI;
+                    ury = coords.MURY + i * coords.SDIY + coords.MRI;
+                    urx = urx - coords.MIEI + 0.01f;
                     this.strategy = this.newArea(lly, llx, ury, urx);
                     this.data.internalMarks[i][j] = PdfTextExtractor.getTextFromPage(this.file, (int)pageNo, this.strategy);
-                    llx += Coordinates.MIEI;
-                    urx += Coordinates.MIEI;
+                    llx += coords.MIEI;
+                    urx += coords.MIEI;
                     this.strategy = this.newArea(lly, llx, ury, urx);
                     this.data.externalMarks[i][j] = PdfTextExtractor.getTextFromPage(this.file, (int)pageNo, this.strategy);
-                    llx = Coordinates.MLLX + j * Coordinates.MRSI;
-                    urx = Coordinates.MURX + j * Coordinates.MRSI;
-                    lly = Coordinates.MLLY + i * Coordinates.SDIY + 40.0f;
-                    ury = Coordinates.MURY + i * Coordinates.SDIY + 40.0f;
+                    llx = coords.MLLX + j * coords.MRSI;
+                    urx = coords.MURX + j * coords.MRSI;
+                    lly = coords.MLLY + i * coords.SDIY + coords.LAST;
+                    ury = coords.MURY + i * coords.SDIY + coords.LAST;
                     this.strategy = this.newArea(lly, llx, ury, urx);
                     this.data.totalMarks[i][j] = PdfTextExtractor.getTextFromPage(this.file, (int)pageNo, this.strategy);
                     if (this.data.totalMarks[i][j].contains("(")) {
@@ -232,21 +232,21 @@ public class PDFReader
                             this.data.externalMarks[i][j] = this.data.externalMarks[i][j].replaceAll("[^0-9]", "");
                         }
                     }
-                    llx = Coordinates.MLLX + (j + 1) * Coordinates.MRSI;
-                    urx = Coordinates.MURX + (j + 1) * Coordinates.MRSI;
-                    lly -= 40.0f;
-                    ury -= 40.0f;
+                    llx = coords.MLLX + (j + 1) * coords.MRSI;
+                    urx = coords.MURX + (j + 1) * coords.MRSI;
+                    lly -= coords.LAST;
+                    ury -= coords.LAST;
                 }
-                lly = Coordinates.CLLY + i * Coordinates.SDIY;
-                ury = Coordinates.CURY + i * Coordinates.SDIY;
-                llx = Coordinates.CLLX;
-                urx = Coordinates.CURX;
+                lly = coords.CLLY + i * coords.SDIY;
+                ury = coords.CURY + i * coords.SDIY;
+                llx = coords.CLLX;
+                urx = coords.CURX;
                 this.strategy = this.newArea(lly, llx, ury, urx);
                 this.data.credits[i] = Byte.parseByte(PdfTextExtractor.getTextFromPage(this.file, (int)pageNo, this.strategy).trim());
-                lly = Coordinates.SRNLLY + (i + 1) * Coordinates.SDIY;
-                ury = Coordinates.SRNURY + (i + 1) * Coordinates.SDIY;
-                llx = Coordinates.SDLLX;
-                urx = Coordinates.SDURX;
+                lly = coords.SRNLLY + (i + 1) * coords.SDIY;
+                ury = coords.SRNURY + (i + 1) * coords.SDIY;
+                llx = coords.SDLLX;
+                urx = coords.SDURX;
             }
             catch (Exception ex) {}
         }
@@ -254,8 +254,8 @@ public class PDFReader
 
     void getExamTypeFromResultPage(int pageNo) {
         try {
-            this.strategy = this.newArea(Coordinates.PHLLY, Coordinates.PHLLX,
-                    Coordinates.PHURY, Coordinates.PHURX);
+            this.strategy = this.newArea(coords.PHLLY, coords.PHLLX,
+                    coords.PHURY, coords.PHURX);
             final String pageheader = PdfTextExtractor.getTextFromPage(this.file, (int) pageNo, this.strategy);
             if (pageheader.toLowerCase().contains("regular")) {
                 this.data.examType = "Regular";
@@ -364,23 +364,42 @@ public class PDFReader
     }
     
     public static void main(final String[] args) {
-        if (args.length != 4) {
+        if (args.length != 5) {
             System.out.println("Error : Supply command line arguments properly!");
-            System.out.println("[Input PDF File Path] [Output CSV File Path] [Institute Code] [Semester]");
+            System.out.println("[Input PDF File Path] [Output CSV File Path] [Institute Code] [Semester] []");
             System.out.println("[Input PDF file path] and [Output CSV file path] must be valid paths, enclosed in double quotes");
             System.out.println("Institute code should be entered WITHOUT double quotes.");
             System.out.println("Semester should be specified in words, for example 3rd semester would be written as 'third', 5th semester as 'fifth' and so on");
             System.exit(0);
         }
         
-            final String inputFilePath = args[0];
-            final PDFReader pdfreader = new PDFReader(inputFilePath);
-            pdfreader.outputFilePath = args[1];
-            pdfreader.instituteCode = args[2];
-            pdfreader.semester = args[3];
-            pdfreader.processFile();
-            pdfreader.file.close();
-            pdfreader.saveCSV();
+        
+        final String inputFilePath = args[0];
+        final PDFReader pdfreader = new PDFReader(inputFilePath);        
+        pdfreader.outputFilePath = args[1];
+        pdfreader.instituteCode = args[2];
+        pdfreader.semester = args[3];
+        args[4] = args[4].toLowerCase();
+        pdfreader.coords = new Coordinates(args[4]);
+
+        if(args[4].equals("new")){
+            switch(pdfreader.semester){
+                case "1": pdfreader.semester = "first"; break;
+                case "2": pdfreader.semester = "second";break;
+                case "3": pdfreader.semester = "third";break;
+                case "4": pdfreader.semester = "fourth";break;
+                case "5": pdfreader.semester = "FIFTH";break;
+                case "6": pdfreader.semester = "sixth";break;
+                case "7": pdfreader.semester = "seventh";break;
+                case "8": pdfreader.semester = "eighth";break;
+            }
+        }else if(args[4].equals("old")){
+            pdfreader.semester = "0"+pdfreader.semester;
+        }
+
+        pdfreader.processFile();
+        pdfreader.file.close();
+        pdfreader.saveCSV();
         
     }
 }
