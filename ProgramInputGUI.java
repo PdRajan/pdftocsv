@@ -97,13 +97,16 @@ public class ProgramInputGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Object[] aboutMessage = {"PDFtoCSV",
                                         "\n",
-                                        "Original authors:",
+                                        "Version 1 authors:",
                                         "Raman Batra",
                                         "Neeraj Aggarwal",
                                         "\n",
-                                        "Maintained by:",
-                                        "Priyadarshani Rajan(2023-Present)",
-                                        "Shivodit Gill(2023-Present)",
+                                        "Version 2 authors:",
+                                        "Prakhar Gupta",
+                                        "\n",
+                                        "Version 3 authors:",
+                                        "Priyadarshani Rajan",
+                                        "Shivodit Gill",
                                         };
                 JOptionPane.showMessageDialog(null, aboutMessage, "About", JOptionPane.INFORMATION_MESSAGE);
             }
