@@ -287,8 +287,8 @@ public class PDFReader
         int recordCount = 0;
         for (short i = this.pageStart; i <= this.pageEnd; ++i) {
             final int percent = i * 100 / this.totalPages;
-            showProgress(i);
-//            System.out.print("\rProcessing  : " + percent + "%");
+            // showProgress(i);
+           System.out.print("\rProcessing  : " + percent + "%");
             if (this.isSoePage(i)) {
                 this.readPageDetails((short)(i + 1));
             }
@@ -388,7 +388,7 @@ public class PDFReader
                 case "2": pdfreader.semester = "second";break;
                 case "3": pdfreader.semester = "third";break;
                 case "4": pdfreader.semester = "fourth";break;
-                case "5": pdfreader.semester = "FIFTH";break;
+                case "5": pdfreader.semester = "fifth";break;
                 case "6": pdfreader.semester = "sixth";break;
                 case "7": pdfreader.semester = "seventh";break;
                 case "8": pdfreader.semester = "eighth";break;
