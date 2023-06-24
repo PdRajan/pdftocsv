@@ -17,7 +17,7 @@ public class ProgramInputGUI extends JFrame {
     PDFWorker pdfworker;
 
     public ProgramInputGUI() {
-        
+
         setTitle("PDFtoCSV by SDC-MSI");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(700, 450);
@@ -25,7 +25,7 @@ public class ProgramInputGUI extends JFrame {
         setResizable(false);
 
         // Create labels and text fields
-        
+
         JLabel inputFileLabel = new JLabel("Input File:");
         JLabel outputFileLabel = new JLabel("Output File:");
         JLabel instituteCodeLabel = new JLabel("Institute Code:");
@@ -68,16 +68,15 @@ public class ProgramInputGUI extends JFrame {
         menuitems = new JMenuItem("Report a bug");
         menuitems.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Object[] aboutMessage = {"To report bugs, please file an issue on the github page:",
-                                        "https://github.com/sdc-msi/pdftocsv",
-                                        };
+                Object[] aboutMessage = { "To report bugs, please file an issue on the github page:",
+                        "https://github.com/sdc-msi/pdftocsv",
+                };
 
                 JOptionPane.showMessageDialog(null, aboutMessage, "About", JOptionPane.INFORMATION_MESSAGE);
             }
         });
 
         menu.add(menuitems);
-        
 
         menuitems = new JMenuItem("Usage guide");
         menuitems.addActionListener(new ActionListener() {
@@ -95,19 +94,19 @@ public class ProgramInputGUI extends JFrame {
         menuitems = new JMenuItem("About PDFtoCSV");
         menuitems.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Object[] aboutMessage = {"PDFtoCSV",
-                                        "\n",
-                                        "Version 1 authors:",
-                                        "Raman Batra",
-                                        "Neeraj Aggarwal",
-                                        "\n",
-                                        "Version 2 authors:",
-                                        "Prakhar Gupta",
-                                        "\n",
-                                        "Version 3 authors:",
-                                        "Priyadarshani Rajan",
-                                        "Shivodit Gill",
-                                        };
+                Object[] aboutMessage = { "PDFtoCSV",
+                        "\n",
+                        "Version 1 authors:",
+                        "Raman Batra",
+                        "Neeraj Aggarwal",
+                        "\n",
+                        "Version 2 authors:",
+                        "Prakhar Gupta",
+                        "\n",
+                        "Version 3 authors:",
+                        "Priyadarshani Rajan",
+                        "Shivodit Gill",
+                };
                 JOptionPane.showMessageDialog(null, aboutMessage, "About", JOptionPane.INFORMATION_MESSAGE);
             }
         });
@@ -123,13 +122,13 @@ public class ProgramInputGUI extends JFrame {
                 if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
                     try {
                         desktop.browse(new URL("https://github.com/sdc-msi/pdftocsv/").toURI());
-                    } catch (Exception except ) {
+                    } catch (Exception except) {
                         except.printStackTrace();
-                    } 
+                    }
                 }
             }
         });
-        
+
         menu.add(menuitems);
 
         menuitems = new JMenuItem("Organization page");
@@ -139,9 +138,9 @@ public class ProgramInputGUI extends JFrame {
                 if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
                     try {
                         desktop.browse(new URL("https://github.com/sdc-msi/").toURI());
-                    } catch (Exception except ) {
+                    } catch (Exception except) {
                         except.printStackTrace();
-                    } 
+                    }
                 }
             }
         });
@@ -196,29 +195,37 @@ public class ProgramInputGUI extends JFrame {
         submitButton.setBackground(new Color(60, 179, 113)); // Set button color
         submitButton.setForeground(Color.WHITE); // Set text color
         submitButton.setFont(new Font("Arial", Font.BOLD, 16)); // Set font style
-
+        
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String inputFile = inputFileTextField.getText();
                 String outputFile = outputFileTextField.getText();
                 String instituteCode = instituteCodeTextField.getText();
                 String semester = (String) semesterComboBox.getSelectedItem();
-                String format = (String) formatComboBox.getSelectedItem();
-                // String inputFile = "results.pdf";
-                // String outputFile = "out.csv";
-                // String instituteCode = "149";
-                // String semester = "1";
-                // String format = "New";
+                String format = (String) formatComboBox.getSelectedItem();               
+
+                try {
+                    if (pdfworker != null && pdfworker.isAlive()) {
+                        pdfworker.interrupt();
+                    }
+
+                    pdfworker = new PDFWorker(inputFile, outputFile, instituteCode, semester, format, outputTextArea,submitButton);
+                    pdfworker.start();
+                } catch (Exception ex) {
+                    System.out.println("Exception: " + ex);
+                }
+
                 try {
                     if (pdfworker != null && pdfworker.isAlive()) {
                         pdfworker.interrupt();
                     }
 
                     pdfworker = new PDFWorker(inputFile, outputFile, instituteCode, semester, format,
-                            outputTextArea);
+                            outputTextArea, submitButton);
                     pdfworker.start();
                 } catch (Exception ex) {
                     System.out.println("Exception: " + ex);
+                    // submitButton.setEnabled(true);
                 }
             }
         });
@@ -228,7 +235,6 @@ public class ProgramInputGUI extends JFrame {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBackground(Color.WHITE); // Set panel background color
 
-        
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -317,9 +323,9 @@ public class ProgramInputGUI extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 new ProgramInputGUI().setVisible(true);
+                
             }
         });
+
     }
 }
-
-
