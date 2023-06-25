@@ -186,7 +186,7 @@ public class ProgramInputGUI extends JFrame {
         });
 
         // Create the output text area
-        outputTextArea = new JTextArea(10, 60);
+        outputTextArea = new JTextArea(7, 60);
         outputTextArea.setEditable(false);
         JScrollPane outputScrollPane = new JScrollPane(outputTextArea);
 
