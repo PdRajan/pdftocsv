@@ -71,14 +71,14 @@ public class UsageGuide extends JDialog {
         "</body></html>");
         contentpane.add(textLabel);
 
-        imageLabel = getImageAsLabel("images/old_example.png");
+        imageLabel = getImageAsLabel("/images/old_example.png");
         contentpane.add(imageLabel);
 
         textLabel = new JLabel("<html><body><h3> Example of new format: </h3>" + 
         "</body></html>");
         contentpane.add(textLabel);
 
-        imageLabel = getImageAsLabel("images/new_example.png");
+        imageLabel = getImageAsLabel("/images/new_example.png");
         contentpane.add(imageLabel);
 
         JScrollPane scrollPane = new JScrollPane(contentpane);
@@ -91,11 +91,11 @@ public class UsageGuide extends JDialog {
 
     JLabel getImageAsLabel(String image_path) {
         try {
-            BufferedImage image = ImageIO.read(new File(image_path));
+            Image image = ImageIO.read(getClass().getResource(image_path));
             Image image_scaled = image.getScaledInstance(640, 300, Image.SCALE_SMOOTH);
             ImageIcon icon = new ImageIcon(image_scaled);
             return new JLabel(icon);
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error opening image.", "Error", JOptionPane.ERROR_MESSAGE);
             return new JLabel("Error: image not found");
         }
