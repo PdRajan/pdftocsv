@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
+import java.awt.Color;
 
 public class PDFWorker extends Thread {
     public ProcessBuilder pb;
@@ -26,24 +27,24 @@ public class PDFWorker extends Thread {
 
         pb = new ProcessBuilder("java", "com.PDFtoCSV.PDFReader", inputFile, outputFile, instituteCode,
                 semester, format);
-
+        outputTextArea.setForeground(Color.WHITE);
     }
 
     private boolean validateInput() {
-        // Validate input file extension
+        boolean valid = true;
         if (inputFile.equals("") || outputFile.equals("") || instituteCode.equals("")) {
-            outputTextArea.setText("Error: Please make sure no fields are empty.");
-            return false;
+            outputTextArea.append("\nError: Please make sure no fields are empty.");
+            valid = false;
         }
         if (inputFile == null || !inputFile.toLowerCase().endsWith(".pdf")) {
-            outputTextArea.setText("Invalid input file. Please select a PDF file.");
-            return false;
+            outputTextArea.append("\nInvalid input file. Please select a PDF file.");
+            valid = false;
         }
 
         // Validate output file extension
         if (outputFile == null || !outputFile.toLowerCase().endsWith(".csv")) {
-            outputTextArea.setText("Invalid output file. Please select a CSV file.");
-            return false;
+            outputTextArea.append("\nInvalid output file. Please select a CSV file.");
+            valid = false;
         }
 
         // Validate input file size
@@ -51,23 +52,28 @@ public class PDFWorker extends Thread {
         long fileSizeInBytes = inputFileObj.length();
         long fileSizeInKB = fileSizeInBytes / 1024;
         if (fileSizeInKB == 0) {
-            outputTextArea.setText("Input file size cannot be 0.");
-            return false;
+            outputTextArea.append("\nInput file size cannot be 0.");
+            valid = false;
         }
 
         // Validate institute code
         if (instituteCode == null || !instituteCode.matches("\\d\\d\\d")) {
-            outputTextArea.setText("Invalid institute code. It must be a three digit number.");
-            return false;
+            outputTextArea.append("\nInvalid institute code. It must be a three digit number.");
+            valid = false;
         }
 
-        return true;
+        if (!valid) {
+            outputTextArea.setForeground(Color.RED);
+        }
+        return valid;
     }
 
     public void run() {
         try {
+            submitButton.setEnabled(false);
+            outputTextArea.setForeground(Color.BLACK);
+            outputTextArea.setText("");
             if (validateInput() && pb != null) {
-                submitButton.setEnabled(false);
                 process = pb.start();
 
                 InputStream inputStream = process.getInputStream();
@@ -81,8 +87,13 @@ public class PDFWorker extends Thread {
         } catch (Exception ex) {
             System.out.println("Exception: " + ex);
             ex.printStackTrace();
+        } finally {
+            submitButton.setEnabled(true);
+            try {
+                this.join();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        submitButton.setEnabled(true);
-
     }
 }
