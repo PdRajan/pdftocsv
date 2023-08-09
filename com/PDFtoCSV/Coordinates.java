@@ -56,7 +56,11 @@ public final class Coordinates {
 
     // Subject code/marks (confirm using PDFBox coords)
     public final float MRI;
+
+    // width of each marks column
     public final float MRSI;
+
+    
     public final float MIEI;
 
     // CS / Remark
