@@ -1,7 +1,7 @@
 package com.PDFtoCSV;
 
 public final class Coordinates {
-    static String a = "new";
+    String PDFType = "new";
 
     // top header
     public final float DLLY;
@@ -71,7 +71,9 @@ public final class Coordinates {
     public final float LAST;
 
     Coordinates(String PDFtype) {
-        if (PDFtype.equals("new")) {
+        this.PDFType = PDFtype.toLowerCase();
+        if (PDFtype.toLowerCase().equals("new")) {
+            System.out.println("Setting new coords.");
             DLLY = 0.0f;
             DURY = 100.0f;
             DLLX = 600.0f;
@@ -112,6 +114,7 @@ public final class Coordinates {
             CURX = 1152.0f;
             LAST = 40.0f;
         } else {
+            System.out.println("Setting old coords.");
             LAST = 36.0f;
             DURY = 90.0f;
             DLLX = 750.0f;

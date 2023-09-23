@@ -54,6 +54,35 @@ public class PDFReader
             System.exit(0);
         }
     }
+
+    public PDFReader(final String inputFile,
+                    final String outputFile,
+                    final String instituteCode,
+                    final String semester,
+                    String format) 
+    {
+        this(inputFile);
+        this.outputFilePath = outputFile;
+        this.instituteCode = instituteCode;
+        this.semester = semester;
+        format = format.toLowerCase();
+        this.coords = new Coordinates(format);
+
+        if (format.equals("new")) {
+            switch(this.semester) {
+                case "1": this.semester = "first"; break;
+                case "2": this.semester = "second";break;
+                case "3": this.semester = "third";break;
+                case "4": this.semester = "fourth";break;
+                case "5": this.semester = "fifth";break;
+                case "6": this.semester = "sixth";break;
+                case "7": this.semester = "seventh";break;
+                case "8": this.semester = "eighth";break;
+            } 
+        } else if(format.toLowerCase().equals("old")){
+            this.semester = "0" + this.semester;
+        }
+    }
     
     public boolean isAlreadyAdded(final String prg, final String scheme) {
         for (final soe_repeat temp : this.done) {
@@ -271,7 +300,7 @@ public class PDFReader
         float percentDone = 100 * pageNo/totalPages ;
         int totalBars = 20;
         int bars = (int) percentDone/ 5;
-        System.out.print("\rProcessing: " + (int)percentDone + "%   \t[");
+        System.out.println("Processing: " + (int)percentDone + "%   \t[");
         for (int i = 0; i < totalBars; i++) {
             if (i <= bars) {
                 System.out.print("#");
@@ -288,7 +317,7 @@ public class PDFReader
         for (short i = this.pageStart; i <= this.pageEnd; ++i) {
             final int percent = i * 100 / this.totalPages;
             // showProgress(i);
-           System.out.print("\rProcessing  : " + percent + "%");
+           System.out.println("\rProcessing  : " + percent + "%");
             if (this.isSoePage(i)) {
                 this.readPageDetails((short)(i + 1));
             }
@@ -401,6 +430,12 @@ public class PDFReader
         pdfreader.file.close();
         pdfreader.saveCSV();
         
+    }
+
+    public void runPDFReader() {
+        this.processFile();
+        this.file.close();
+        this.saveCSV();
     }
 }
 
