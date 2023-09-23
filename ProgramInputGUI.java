@@ -154,7 +154,7 @@ public class ProgramInputGUI extends JFrame {
         // semesterComboBox.
 
         // Create the format combo box
-        String[] formatOptions = { "New", "Old" };
+        String[] formatOptions = { "New (52)", "New (46)", "Old" };
         formatComboBox = new JComboBox<>(formatOptions);
 
         // Create the file chooser button for input file
