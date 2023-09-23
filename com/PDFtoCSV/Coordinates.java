@@ -1,7 +1,7 @@
 package com.PDFtoCSV;
 
 public final class Coordinates {
-    static String a = "new";
+    String PDFType = "new";
 
     // top header
     public final float DLLY;
@@ -154,6 +154,7 @@ public final class Coordinates {
             CURX = 1152.0f;
             LAST = 40.0f;
         } else {
+            System.out.println("Setting old coords.");
             LAST = 36.0f;
             DURY = 90.0f;
             DLLX = 750.0f;

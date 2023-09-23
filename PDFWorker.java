@@ -5,9 +5,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.awt.Color;
+import com.PDFtoCSV.PDFReader;
+import java.io.PrintStream;
 
 public class PDFWorker extends Thread {
-    public ProcessBuilder pb;
+    public PDFReader pdfreader;
     public Process process;
     public JTextArea outputTextArea;
     public String inputFile;
@@ -24,8 +26,9 @@ public class PDFWorker extends Thread {
         this.instituteCode = instituteCode;
         this.format = format;
         this.submitButton = submitButton;
-
-        pb = new ProcessBuilder("java", "com.PDFtoCSV.PDFReader", inputFile, outputFile, instituteCode,
+        
+        
+        pdfreader = new PDFReader(inputFile, outputFile, instituteCode,
                 semester, format);
         outputTextArea.setForeground(Color.WHITE);
     }
@@ -73,16 +76,10 @@ public class PDFWorker extends Thread {
             submitButton.setEnabled(false);
             outputTextArea.setForeground(Color.BLACK);
             outputTextArea.setText("");
-            if (validateInput() && pb != null) {
-                process = pb.start();
-
-                InputStream inputStream = process.getInputStream();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    outputTextArea.setText(line);
-                }
+            if (validateInput() && pdfreader != null) {
+                PrintStream output = new PrintStream(new TextAreaOutputStream(outputTextArea));
+                System.setOut(output);
+                pdfreader.runPDFReader();
             }
         } catch (Exception ex) {
             System.out.println("Exception: " + ex);
