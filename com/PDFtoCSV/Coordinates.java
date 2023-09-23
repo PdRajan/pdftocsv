@@ -56,11 +56,7 @@ public final class Coordinates {
 
     // Subject code/marks (confirm using PDFBox coords)
     public final float MRI;
-
-    // width of each marks column
     public final float MRSI;
-
-    
     public final float MIEI;
 
     // CS / Remark
@@ -71,7 +67,7 @@ public final class Coordinates {
     public final float LAST;
 
     Coordinates(String PDFtype) {
-        if (PDFtype.equals("new")) {
+        if (PDFtype.equals("new (52)")) {
             DLLY = 0.0f;
             DURY = 100.0f;
             DLLX = 600.0f;
@@ -104,7 +100,53 @@ public final class Coordinates {
             MURY = 145.0f;
             MURX = 292.0f;
             MRI = 22.3f;
+
+            // MRSI = 46.00f;
+            MRSI = 52.00f;
+
+            MIEI = 23.00f;
+            CLLY = 125.0f;
+            CLLX = 1028.0f;
+            CURY = 191.0f;
+            CURX = 1152.0f;
+            LAST = 40.0f;
+        } else if (PDFtype.equals("new (46)")) {
+            DLLY = 0.0f;
+            DURY = 100.0f;
+            DLLX = 600.0f;
+            DURX = 1172.0f;
+            SOELLY = 110.0f;
+            SOELLX = 455.0f;
+            SOEURY = 130.0f;
+            SOEURX = 690.0f;
+            PHLLY = 100.0f;
+            PHLLX = 30.0f;
+            PHURY = 125.0f;
+            PHURX = 1100.0f;
+            PDLLY = 140.0f;
+            PDLLX = 60.0f;
+            PDURY = 175.0f;
+            PDURX = 900.0f;
+            SRNLLY = 125.0f;
+            SDLLX = 86.0f;
+            SRNURY = 135.0f;
+            SDURX = 245.0f;
+            SNLLY = 134.0f;
+            SNURY = 143.0f;
+            SIDLLY = 143.0f;
+            SIDURY = 153.0f;
+            SSIDLLY = 153.0f;
+            SSIDURY = 162.0f;
+            SDIY = 67.0f;
+            MLLY = 125.0f;
+            MLLX = 246.0f;
+            MURY = 145.0f;
+            MURX = 292.0f;
+            MRI = 22.3f;
+
             MRSI = 46.00f;
+            // MRSI = 52.00f;
+
             MIEI = 23.00f;
             CLLY = 125.0f;
             CLLX = 1028.0f;
@@ -152,5 +194,5 @@ public final class Coordinates {
             CURX = 1185.0f;
             DLLY = 0.0f;
         }
-    }      
+    }
 }
