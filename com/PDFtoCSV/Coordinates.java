@@ -72,8 +72,7 @@ public final class Coordinates {
 
     Coordinates(String PDFtype) {
         this.PDFType = PDFtype.toLowerCase();
-        if (PDFtype.toLowerCase().equals("new")) {
-            System.out.println("Setting new coords.");
+        if (PDFtype.equals("new")) {
             DLLY = 0.0f;
             DURY = 100.0f;
             DLLX = 600.0f;
@@ -114,7 +113,6 @@ public final class Coordinates {
             CURX = 1152.0f;
             LAST = 40.0f;
         } else {
-            System.out.println("Setting old coords.");
             LAST = 36.0f;
             DURY = 90.0f;
             DLLX = 750.0f;
@@ -155,5 +153,5 @@ public final class Coordinates {
             CURX = 1185.0f;
             DLLY = 0.0f;
         }
-    }      
+    }
 }
