@@ -305,12 +305,14 @@ public class ProgramInputGUI extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 6;
         gbc.gridwidth = 3;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.WEST;
         panel.add(outputScrollPane, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 7;
         gbc.gridwidth = 3;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.CENTER;
         panel.add(submitButton, gbc);
 

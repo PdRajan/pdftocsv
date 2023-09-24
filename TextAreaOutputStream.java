@@ -4,13 +4,19 @@ import javax.swing.JTextArea;
 
 public class TextAreaOutputStream extends OutputStream {
     private JTextArea outputTextArea;
+    String outputStr;
     
     TextAreaOutputStream (JTextArea textArea) {
         this.outputTextArea = textArea;
-
+        outputStr = "";
     }
 
     public void write (int c) throws IOException {
-        outputTextArea.append(String.valueOf((char) c));
+        if (((char) c) != '\n') {
+            outputStr += String.valueOf((char) c);
+        } else {
+            outputTextArea.setText(outputStr);
+            outputStr = "";
+        }
     }
 }
