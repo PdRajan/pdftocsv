@@ -68,7 +68,7 @@ public class PDFReader
         format = format.toLowerCase();
         this.coords = new Coordinates(format);
 
-        if (format.equals("new")) {
+        if (format.startsWith("new")) {
             switch(this.semester) {
                 case "1": this.semester = "first"; break;
                 case "2": this.semester = "second";break;
@@ -411,19 +411,7 @@ public class PDFReader
         args[4] = args[4].toLowerCase();
         pdfreader.coords = new Coordinates(args[4]);
 
-        if (args[4].equals("new (52)")) {
-            switch (pdfreader.semester) {
-                case "1": pdfreader.semester = "first"; break;
-                case "2": pdfreader.semester = "second";break;
-                case "3": pdfreader.semester = "third";break;
-                case "4": pdfreader.semester = "fourth";break;
-                case "5": pdfreader.semester = "fifth";break;
-                case "6": pdfreader.semester = "sixth";break;
-                case "7": pdfreader.semester = "seventh";break;
-                case "8": pdfreader.semester = "eighth";break;
-            }
-        }
-        if (args[4].equals("new (46)")) {
+        if (args[4].startsWith("new")) {
             switch (pdfreader.semester) {
                 case "1": pdfreader.semester = "first"; break;
                 case "2": pdfreader.semester = "second";break;
