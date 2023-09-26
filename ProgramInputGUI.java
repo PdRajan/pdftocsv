@@ -17,12 +17,13 @@ public class ProgramInputGUI extends JFrame {
     PDFWorker pdfworker;
 
     public ProgramInputGUI() {
-
+        super();
         setTitle("PDFtoCSV by SDC-MSI");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(700, 450);
         setLocationRelativeTo(null);
         setResizable(false);
+        setBackground(Color.WHITE);
 
         // Create labels and text fields
 
@@ -159,7 +160,8 @@ public class ProgramInputGUI extends JFrame {
 
         // Create the file chooser button for input file
         JButton inputFileButton = new JButton("Browse");
-        inputFileButton.setBackground(new Color(135, 206, 250));
+        inputFileButton.setBackground(new Color(34, 54, 107));
+        inputFileButton.setForeground(Color.WHITE);
         inputFileButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser(".");
@@ -173,7 +175,8 @@ public class ProgramInputGUI extends JFrame {
 
         // Create the file chooser button for output file location
         JButton outputFileButton = new JButton("Browse");
-        outputFileButton.setBackground(new Color(135, 206, 250)); // Set button color
+        outputFileButton.setBackground(new Color(34, 54, 107)); // Set button color
+        outputFileButton.setForeground(Color.WHITE);
         outputFileButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser(".");
@@ -314,9 +317,18 @@ public class ProgramInputGUI extends JFrame {
         gbc.anchor = GridBagConstraints.CENTER;
         panel.add(submitButton, gbc);
 
+        gbc.gridx = 0;
+        gbc.gridy = 8;
+        gbc.gridwidth = 3;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        // panel.add(new SocialLinkBar(new GridBagLayout()), gbc);
+
         // Add the panel to the frame
         Container contentPane = getContentPane();
+        contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.PAGE_AXIS));
         contentPane.add(panel);
+        contentPane.add(new SocialLinkBar(new GridBagLayout()));
     }
 
     public static void main(String[] args) {
