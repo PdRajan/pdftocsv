@@ -1,19 +1,25 @@
-# pdftocsv
-pdftocsv is a program to generate results from the result PDFs released by GGSIP University.
 
-## Command
-java com.PDFtoCSV.PDFReader [input path] [output path] [instution code] [semester] [new/old] 
+# IPU Result Extractor
+It is a specialized application designed to extract class-specific results from IPU result PDFs and convert them into CSV files.
 
-1. **Input path** : Enter the path of the input PDF file. Use quotes if there are spaces in the filename or folder name.
-2. **Output path** : Enter the path of the output CSV file. Use quotes if there are spaces in the filename or folder name.
-3. **Instustion** : Enter the institution code for your college.
-4. **Semester** : Enter the semester.
-5. **Format** : Specify the format of PDF, new or old.
+<img  width='550px'  src="images/app.png" />
 
-## Example Command
-java com.PDFtoCSV.PDFReader ~/pdf/bca3.pdf bca3.csv 149 3 new 
+## Input Fields
+
+1. **Input File**: Provide the file path of the input PDF. If the filename or folder includes spaces, enclose it in quotes.
+2. **Output File**: Specify the file path for the resulting CSV output. If there are spaces in the filename or folder name, be sure to enclose it in quotes.
+3. **Institution Code**: Provide your college's unique institution code.
+4. **Semester**: Choose the relevant semester from the options.
+5. **PDF Format**: Select the appropriate PDF format from the choices: "New (52)," "New (46)," or "Old."
 
 
+## Format
+
+The IPU result PDF format has undergone changes, resulting in the following options:
+
+1.  **Old**: Refers to the previous format.
+2.  **New (46)**: Implemented when IPU updated the PDF format.
+3.  **New (52)** : Similar to "New (46)," but notable for the adjustment in the width of each marks column, now at 52 instead of the previous 46.
 
 ## Original authors:
 raman.batra1709@gmail.com\
