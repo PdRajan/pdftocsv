@@ -332,12 +332,25 @@ public class ProgramInputGUI extends JFrame {
     }
 
     public static void main(String[] args) {
+        // System.setProperty("awt.useSystemAAFontSettings", "on");
+        System.setProperty("swing.aatext", "true");
+
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                System.out.println(info);
+                if ("Metal".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            
+        }
+        
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 new ProgramInputGUI().setVisible(true);
-                
             }
         });
-
     }
 }
