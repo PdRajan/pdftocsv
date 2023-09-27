@@ -4,7 +4,6 @@
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 
 public class SocialLinkBar extends JPanel {
     SocialLinkBar() {
@@ -20,15 +19,10 @@ public class SocialLinkBar extends JPanel {
         ImageIcon twitterIcon = new ImageIcon("images/x.png");
         ImageIcon linkedinIcon = new ImageIcon("images/linkedin.png");
 
-        JLabel facebookLogoLabel = new JLabel(facebookIcon);
-        JLabel instagramLogoLabel = new JLabel(instagramIcon);
-        JLabel twitterLogoLabel = new JLabel(twitterIcon);
-        JLabel linkedinLogoLabel = new JLabel(linkedinIcon);
-
-        JHyperlink facebook = new JHyperlink("MSI@Facebook", "https://www.facebook.com/maharaja.surajmal.169/", hyperlinkColor, font);
-        JHyperlink instagram = new JHyperlink("MSI@Instagram", "https://www.instagram.com/maharajasurajmalofficial/", hyperlinkColor, font);
-        JHyperlink linkedin = new JHyperlink("MSI@Linkedin", "https://www.linkedin.com/in/maharaja-surajmal-institute-9a7b931b2/", hyperlinkColor, font);
-        JHyperlink twitter = new JHyperlink("MSI@Twitter", "https://twitter.com/MSI_JanakPuri58", hyperlinkColor, font);
+        JHyperlink facebook = new JHyperlink("MSI@Facebook", "https://www.facebook.com/maharaja.surajmal.169/", hyperlinkColor, font, facebookIcon);
+        JHyperlink instagram = new JHyperlink("MSI@Instagram", "https://www.instagram.com/maharajasurajmalofficial/", hyperlinkColor, font, instagramIcon);
+        JHyperlink linkedin = new JHyperlink("MSI@Linkedin", "https://www.linkedin.com/in/maharaja-surajmal-institute-9a7b931b2/", hyperlinkColor, font, linkedinIcon);
+        JHyperlink twitter = new JHyperlink("MSI@Twitter", "https://twitter.com/MSI_JanakPuri58", hyperlinkColor, font, twitterIcon);
 
         add(facebook);
         add(instagram);
