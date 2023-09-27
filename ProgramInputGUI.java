@@ -328,7 +328,7 @@ public class ProgramInputGUI extends JFrame {
         Container contentPane = getContentPane();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.PAGE_AXIS));
         contentPane.add(panel);
-        contentPane.add(new SocialLinkBar(new GridBagLayout()));
+        contentPane.add(new SocialLinkBar());
     }
 
     public static void main(String[] args) {
