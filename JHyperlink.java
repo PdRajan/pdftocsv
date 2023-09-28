@@ -9,26 +9,44 @@ import javax.swing.JLabel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.Icon;
 
 public class JHyperlink extends JLabel {
     JHyperlink(String text, String website) {
-        this(text, website, Color.BLUE.darker());
+        this(text, website, Color.BLUE.darker(), new Font("Arial", Font.PLAIN, 14), null);
     }
 
     JHyperlink(String text, String website, Color color) {
-        this(text, website, color, new Font("Arial", Font.PLAIN, 14));
+        this(text, website, color, new Font("Arial", Font.PLAIN, 14), null);
     }
 
     JHyperlink(String text, String website, Font font) {
-        this(text, website, Color.BLUE.darker(), font);
+        this(text, website, Color.BLUE.darker(), font, null);
     }
 
     JHyperlink(String text, String website, Color color, Font font) {
+        this(text, website, color, font, null);
+    }
+
+    JHyperlink(String text, String website, Icon icon) {
+        this(text, website, Color.BLUE.darker(), new Font("Arial", Font.PLAIN, 14), icon);
+    }
+
+    JHyperlink(String text, String website, Color color, Icon icon) {
+        this(text, website, color, new Font("Arial", Font.PLAIN, 14), icon);
+    }
+
+    JHyperlink(String text, String website, Font font, Icon icon) {
+        this(text, website, Color.BLUE.darker(), font, icon);
+    }
+
+    JHyperlink(String text, String website, Color color, Font font, Icon icon) {
         super(text);
 
         setForeground(color);
         setFont(font);
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        setIcon(icon);
 
         addMouseListener(new MouseAdapter() {
             @Override
