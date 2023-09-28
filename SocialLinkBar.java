@@ -4,8 +4,15 @@
 
 import javax.swing.*;
 import java.awt.*;
+import javax.imageio.ImageIO;
+import java.io.IOException;
 
 public class SocialLinkBar extends JPanel {
+    ImageIcon facebookIcon;
+    ImageIcon instagramIcon;
+    ImageIcon twitterIcon;
+    ImageIcon linkedinIcon;
+
     SocialLinkBar() {
         super();
         setLayout(new FlowLayout(FlowLayout.CENTER, 50, 3));
@@ -14,11 +21,15 @@ public class SocialLinkBar extends JPanel {
         Color hyperlinkColor = Color.WHITE;
         Font font = new Font("Arial", Font.PLAIN, 14);
 
-        ImageIcon facebookIcon = new ImageIcon("images/fb.png");
-        ImageIcon instagramIcon = new ImageIcon("images/insta.png");
-        ImageIcon twitterIcon = new ImageIcon("images/x.png");
-        ImageIcon linkedinIcon = new ImageIcon("images/linkedin.png");
-
+        try {
+            facebookIcon = new ImageIcon(ImageIO.read(getClass().getResource("images/fb.png")));
+            instagramIcon = new ImageIcon(ImageIO.read(getClass().getResource("images/insta.png")));
+            twitterIcon = new ImageIcon(ImageIO.read(getClass().getResource("images/x.png")));
+            linkedinIcon = new ImageIcon(ImageIO.read(getClass().getResource("images/linkedin.png")));
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
         JHyperlink facebook = new JHyperlink("MSI@Facebook", "https://www.facebook.com/maharaja.surajmal.169/", hyperlinkColor, font, facebookIcon);
         JHyperlink instagram = new JHyperlink("MSI@Instagram", "https://www.instagram.com/maharajasurajmalofficial/", hyperlinkColor, font, instagramIcon);
         JHyperlink linkedin = new JHyperlink("MSI@Linkedin", "https://www.linkedin.com/in/maharaja-surajmal-institute-9a7b931b2/", hyperlinkColor, font, linkedinIcon);
