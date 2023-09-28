@@ -30,18 +30,11 @@ public class UsageGuide extends JDialog {
         contentpane.add(textLabel);
 
         textLabel = new JLabel("<html><body><ul style=\"width: 720\">\n" + 
-            "<li><b>Input File:</b> Path to the .pdf file containing the " + 
-            "result data. You can select the file using the Browse button.</li>" + 
-            "<li><b> Output File: </b> Path to the output file where the " + 
-            "data will be stored in form of a .csv file. </li>" + 
-            "<li><b>Institute Code: </b> Must be the three digit institute " +
-            "code. The application will try to find results of students " +
-            "from this college code only. </li>" + 
-            "<li><b>Semester: </b> The software will collect results of " +
-            "this semester to put into the.csv file </li>" +
-            "<li><b> Format: </b> The format of the input file. Differences " +
-            "between the 'New' and 'Old' format styles is explained in the" +
-            "next section. </li></ul></body></html>");
+        "<li><b>Input File:</b> Provide the file path of the input PDF. If the filename or folder includes spaces, enclose it in quotes.</li>" +
+        "<li><b> Output File: </b> Specify the file path for the resulting CSV output. If there are spaces in the filename or folder name, be sure to enclose it in quotes. </li>" +
+        "<li><b>Institute Code: </b> Provide your college's unique institution code.</li>" +
+        "<li><b>Semester: </b> Choose the relevant semester from the options. </li>" +
+        "<li><b> PDF Format: </b> Select the appropriate PDF format from the choices: \"New (52),\" \"New (46),\" or \"Old.\" </li></ul><hr></body></html>");
         contentpane.add(textLabel);
 
         textLabel = new JLabel("<html><body><h2>Formats: New vs Old</h2></body></html>");
@@ -51,34 +44,44 @@ public class UsageGuide extends JDialog {
             "distinguished by looking at the Scheme Of Examinations page " + 
             "in the results pdf. Here are some differences between the " + 
             "two: </p>" +
-            "<h3> Old Format </h3>\n" + 
-            "<ul style=\"width: 720\"><li> The text is in a monospace font similar to Courier. </li>" +
-            "<li> There is no blank space between the edges of the page and " +
-            "the edges of the Scheme Of Examination table. </li>" + 
-            "<li> The title, Scheme Of Examinations, is enclosed within " + 
-            "brackets.</li></ul>\n" +
+            
+
             "<h3>New Format </h3>\n" +
             "<ul style=\"width: 720\"><li> The text is in a serif font similar to Times  New " + 
             "Roman. </li>" +
             "<li> There is a blank space between the edges of the page and " +
             "the edges of the Scheme Of Examination table on either side. </li>" + 
             "<li> The title, Scheme Of Examinations, is not enclosed within " + 
+            "brackets.</li><br>"+
+            
+            "<li><b>New (46) :</b> New format with each marks column width 46 </li>" + 
+            "<li><b>New (52) :</b> New format with each marks column width 52 </li>" + 
+            "</ul>\n" +
+
+
+            "<h3> Old Format </h3>\n" + 
+            "<ul style=\"width: 720\"><li> The text is in a monospace font similar to Courier. </li>" +
+            "<li> There is no blank space between the edges of the page and " +
+            "the edges of the Scheme Of Examination table. </li>" + 
+            "<li> The title, Scheme Of Examinations, is enclosed within " + 
             "brackets.</li></ul>\n" +
-            "</body></html>");
+            "<hr></body></html>");
         contentpane.add(textLabel);
 
-        textLabel = new JLabel("<html><body><h3> Example of old format: </h3>" + 
-        "</body></html>");
-        contentpane.add(textLabel);
-
-        imageLabel = getImageAsLabel("/images/old_example.png");
-        contentpane.add(imageLabel);
+        
 
         textLabel = new JLabel("<html><body><h3> Example of new format: </h3>" + 
         "</body></html>");
         contentpane.add(textLabel);
 
         imageLabel = getImageAsLabel("/images/new_example.png");
+        contentpane.add(imageLabel);
+
+        textLabel = new JLabel("<html><body><h3> Example of old format: </h3>" + 
+        "</body></html>");
+        contentpane.add(textLabel);
+
+        imageLabel = getImageAsLabel("/images/old_example.png");
         contentpane.add(imageLabel);
 
         JScrollPane scrollPane = new JScrollPane(contentpane);
