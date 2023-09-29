@@ -29,3 +29,9 @@ replay_pid*
 # IntelliJ idea folder
 .idea
 *.iml
+
+#.vscode workspace settings
+.vscode
+
+# Maven build folder
+target
