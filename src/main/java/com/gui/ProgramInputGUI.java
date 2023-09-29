@@ -1,4 +1,4 @@
-package com.sdcmsi.ui;
+package com.gui;
 
 import javax.swing.*;
 import java.awt.*;

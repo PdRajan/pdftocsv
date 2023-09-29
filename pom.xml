@@ -61,7 +61,7 @@
             <archive>
               <manifest>
                 <addClasspath>true</addClasspath>
-                <mainClass>com.sdcmsi.ui.ProgramInputGUI</mainClass>
+                <mainClass>com.gui.ProgramInputGUI</mainClass>
               </manifest>
             </archive>
           </configuration>
@@ -89,7 +89,7 @@
           <configuration>
             <archive>
               <manifest>
-                <mainClass>com.sdcmsi.ui.ProgramInputGUI</mainClass>
+                <mainClass>com.gui.ProgramInputGUI</mainClass>
               </manifest>
             </archive>
             <descriptorRefs>

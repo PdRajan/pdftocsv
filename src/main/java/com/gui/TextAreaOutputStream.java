@@ -1,4 +1,4 @@
-package com.sdcmsi.ui;
+package com.gui;
 
 import java.io.OutputStream;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.sdcmsi.ui;
+package com.gui;
 
 /**
  * Implements the bar at the bottom having social media links
