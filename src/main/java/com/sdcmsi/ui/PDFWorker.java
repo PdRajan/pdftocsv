@@ -1,3 +1,5 @@
+package com.sdcmsi.ui;
+
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import java.io.InputStream;

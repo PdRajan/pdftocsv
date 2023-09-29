@@ -1,3 +1,5 @@
+package com.sdcmsi.ui;
+
 import java.awt.image.BufferedImage;
 import java.awt.Image;
 import java.io.File;

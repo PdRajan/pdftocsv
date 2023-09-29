@@ -1,3 +1,5 @@
+package com.sdcmsi.ui;
+
 import java.io.OutputStream;
 import java.io.IOException;
 import javax.swing.JTextArea;

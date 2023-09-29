@@ -1,3 +1,4 @@
+package com.sdcmsi.ui;
 /**
  * Class to create a clickable JLabel whuch acts as a hyperlink.
  */
