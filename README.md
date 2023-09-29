@@ -2,7 +2,8 @@
 # IPU Result Extractor
 It is a specialized application designed to extract class-specific results from IPU result PDFs and convert them into CSV files.
 
-<img  width='550px'  src="images/app.png" />
+<img  width='550px'  src="src/main/resources/images/app.png" />
+
 
 ## Input Fields
 
