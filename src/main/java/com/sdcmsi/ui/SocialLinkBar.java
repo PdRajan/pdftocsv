@@ -24,10 +24,10 @@ public class SocialLinkBar extends JPanel {
         Font font = new Font("Arial", Font.PLAIN, 14);
 
         try {
-            facebookIcon = new ImageIcon(ImageIO.read(getClass().getResource("images/fb.png")));
-            instagramIcon = new ImageIcon(ImageIO.read(getClass().getResource("images/insta.png")));
-            twitterIcon = new ImageIcon(ImageIO.read(getClass().getResource("images/x.png")));
-            linkedinIcon = new ImageIcon(ImageIO.read(getClass().getResource("images/linkedin.png")));
+            facebookIcon = new ImageIcon(ImageIO.read(getClass().getResource("/images/fb.png")));
+            instagramIcon = new ImageIcon(ImageIO.read(getClass().getResource("/images/insta.png")));
+            twitterIcon = new ImageIcon(ImageIO.read(getClass().getResource("/images/x.png")));
+            linkedinIcon = new ImageIcon(ImageIO.read(getClass().getResource("/images/linkedin.png")));
         }
         catch (IOException e) {
             e.printStackTrace();
