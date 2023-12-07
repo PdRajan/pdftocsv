@@ -21,6 +21,47 @@ The IPU result PDF format has undergone changes, resulting in the following opti
 2.  **New (46)**: Implemented when IPU updated the PDF format.
 3.  **New (52)** : Similar to "New (46)," but notable for the adjustment in the width of each marks column, now at 52 instead of the previous 46.
 
+
+## How to install
+
+To use PDFtoCSV on your computer, follow these steps:
+
+1. Download and install Java. The newest release is usually best. Download link: https://jdk.java.net/21/
+
+2. Follow the installation instructions and complete the Java installation.
+
+3. Now, go the the "Releases" section of this repository, which can be found to the right of the page.
+
+4. Click on the .jar file to download it to your computer.
+
+5. Double click the jar file, if everything is properly set up, PDFtoCSV should launch.
+
+6. Finished!
+
+
+## How to build
+
+If you want to build PDFtoCSV yourself or would like to develop on it, please make sure that Maven and git is installed on your system.
+
+Then, you can build this branch (maven-build) by executing the following steps:
+
+```bash
+# Clone repository
+git clone https://github.com/HotDogEnemy/pdftocsv.git
+
+# cd into the cloned directory
+cd pdftocsv
+
+# Compile all source files into .class files:
+javac **/*.java
+
+# Create .jar using the jar command
+jar -cfm pdtocsv.jar manifest.txt **/*
+
+# To remove the previously compiled .class files (i.e. clean operation)
+rm *.class com/PDFtoCSV/*.class
+```
+
 ## Original authors:
 raman.batra1709@gmail.com\
 Neeraj
